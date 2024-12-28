@@ -4,6 +4,4 @@
 class Restore:
     '''Страница восстановления пароля.'''
     EMAIL = 'test@mail.ru'
-    ENTER_CODE = 'Введите код из письма'  # плейсхолдер
-    TITLE = 'Восстановление пароля'  # заголовок
     ACTIVE = 'input_status_active'  # класс поля в фокусе

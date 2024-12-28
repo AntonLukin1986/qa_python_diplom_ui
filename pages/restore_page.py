@@ -20,15 +20,15 @@ class RestorePage(BasePage):
 
     @allure.step('Получение заголовка формы «Восстановление пароля»')
     def get_restore_pass_title(self):
-        return self.get_element_text(L.RESTORE_PASS_HEADER)
+        return self.get_element(L.RESTORE_PASS_TITLE)
 
     @allure.step('Получение плейсхолдера поля «Код из письма»')
     def get_enter_code_label(self):
-        return self.get_element_text(L.ENTER_CODE_LABEL)
+        return self.get_element(L.ENTER_CODE_LABEL)
 
-    @allure.step('Получение атрибута "class" поля ввода пароля')
-    def get_class_input_pass(self):
-        return self.get_element(L.PASSWORD_INPUT).get_attribute(name='class')
+    @allure.step('Получение рамки поля для ввода пароля')
+    def get_password_frame(self):
+        return self.get_element(L.PASSWORD_FRAME)
 
     @allure.step('Клик по кнопке «Восстановить»')
     def restore_btn_click(self):
