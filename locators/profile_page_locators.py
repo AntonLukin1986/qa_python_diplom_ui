@@ -1,12 +1,12 @@
 '''Локаторы страницы профиля пользователя.'''
 from selenium.webdriver.common.by import By
 
-from .patterns import BUTTON_TXT, DIV_CONTAINS_CLS, LINK_TXT, PARAGRAPH_TXT
+from . import patterns as p
 
 
-EXIT_LINK = By.XPATH, BUTTON_TXT.format('Выход')
-ORDER_HISTORY_LINK = By.XPATH, LINK_TXT.format('История заказов')
-ORDERS_DIV = By.XPATH, DIV_CONTAINS_CLS.format('OrderHistory')
-MESSAGE = By.XPATH, PARAGRAPH_TXT.format(
+EXIT_LINK = By.XPATH, p.BUTTON_TXT.format('Выход')
+ORDER_HISTORY_LINK = By.XPATH, p.LINK_TXT.format('История заказов')
+ORDERS_DIV = By.XPATH, p.DIV_CONTAINS_CLS.format('OrderHistory')
+MESSAGE = By.XPATH, p.PARAG_TXT.format(
     'В этом разделе вы можете изменить свои персональные данные'
 )
