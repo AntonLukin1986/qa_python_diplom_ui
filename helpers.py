@@ -32,5 +32,11 @@ def get_user_data():
     }
 
 
+def format_locator(locator, value):
+    '''Отформатировать локатор элемента.'''
+    method, pattern = locator
+    return method, pattern.format(value)
+
+
 if __name__ == '__main__':
     print(get_user_data())

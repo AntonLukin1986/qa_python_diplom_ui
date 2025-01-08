@@ -5,8 +5,10 @@ from . import patterns as p
 
 
 EXIT_LINK = By.XPATH, p.BUTTON_TXT.format('Выход')
-ORDER_HISTORY_LINK = By.XPATH, p.LINK_TXT.format('История заказов')
-ORDERS_DIV = By.XPATH, p.DIV_CONTAINS_CLS.format('OrderHistory')
 MESSAGE = By.XPATH, p.PARAG_TXT.format(
     'В этом разделе вы можете изменить свои персональные данные'
 )
+ORDER_NUMBER = By.XPATH, p.FIRST_LI_ITEM.format(
+    'OrderHistory_listItem') + p.P_CONTAINS_CLS.format('digits')
+ORDERS_DIV = By.XPATH, p.DIV_CONTAINS_CLS.format('OrderHistory')  # ??????????????????????????????? метка в тесте
+ORDERS_HISTORY_LINK = By.XPATH, p.LINK_TXT.format('История заказов')

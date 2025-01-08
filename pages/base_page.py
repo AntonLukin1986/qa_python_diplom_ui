@@ -28,6 +28,11 @@ class BasePage:
         #     self.driver.execute_script('arguments[0].click()', self.get_element(locator))
         self.get_element(locator).click()
 
+    def wait_and_click_element(self, locator):
+        '''Клик по элементу с предварительным ожиданием.'''
+        self.wait_for(e_c.element_to_be_clickable(locator))
+        self.get_element(locator).click()
+
     def fill_in(self, locator, *value):
         '''Заполнение поля ввода.'''
         self.get_element(locator).send_keys(value)
