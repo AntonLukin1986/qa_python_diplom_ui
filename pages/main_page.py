@@ -4,7 +4,7 @@ import random
 import allure
 from selenium.webdriver.support.expected_conditions import (
     text_to_be_present_in_element as text_in_element,
-    invisibility_of_element_located as element_invisibility
+    invisibility_of_element_located as element_invisible
 )
 
 from data import SLICERS, STUB
@@ -27,7 +27,7 @@ class MainPage(BasePage):
     @allure.step('Клик по X окна деталей ингредиента')
     def ingredient_details_X_click(self):
         self.click_element(L.INGREDIENT_X_BTN)
-        self.wait_for(element_invisibility(L.INGREDIENT_X_BTN))
+        self.wait_for(element_invisible(L.INGREDIENT_X_BTN))
 
     @allure.step('Клик по кнопке «Оформить заказ»')
     def place_order_btn_click(self):

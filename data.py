@@ -1,5 +1,6 @@
 '''Статичные данные.'''
 ACTIVE = 'input_status_active'  # класс поля в фокусе
+BLOCKER = '<div class="Modal_modal_overlay__x2ZCr">'  # артефакт для Firefox
 EMAIL = 'test@mail.ru'
 SLICERS = (
     slice(2),  # индексы булок
