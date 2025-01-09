@@ -2,9 +2,12 @@
 import random
 
 import allure
-from selenium.webdriver.support import expected_conditions as e_c
+from selenium.webdriver.support.expected_conditions import (
+    text_to_be_present_in_element as text_in_element,
+    invisibility_of_element_located as element_invisibility
+)
 
-from data import ORDER_NUMBER_STUB, SLICERS
+from data import SLICERS, STUB
 from helpers import format_locator
 from locators import main_page_locators as L
 from pages.base_page import BasePage
@@ -12,34 +15,19 @@ from pages.base_page import BasePage
 
 class MainPage(BasePage):
 
-    @allure.step('Клик по логотипу «Stellar burgers»')
-    def logo_click(self):
-        self.click_element(L.LOGO_LINK)
-
     @allure.step('Клик по кнопке «Войти в аккаунт»')
     def enter_account_btn_click(self):
         self.click_element(L.ENTER_ACCOUNT_BTN)
-
-    @allure.step('Клик по ссылке «Личный кабинет»')
-    def personal_account_link_click(self):
-        self.click_element(L.PERSONAL_ACCOUNT_LINK)
-
-    @allure.step('Клик по ссылке «Конструктор»')
-    def constructor_link_click(self):
-        self.click_element(L.CONSTRUCTOR_LINK)
-
-    @allure.step('Клик по ссылке «Лента Заказов»')
-    def orders_list_link_click(self):
-        self.click_element(L.ORDERS_LIST_LINK)
 
     @allure.step('Клик по ингредиенту')
     def ingredient_click(self, ingredient):
         self.scroll_to(ingredient)
         ingredient.click()
 
-    @allure.step('Клик по крестику окна деталей ингредиента')
+    @allure.step('Клик по X окна деталей ингредиента')
     def ingredient_details_X_click(self):
-        self.wait_and_click_element(L.CLOSE_BTN)
+        self.click_element(L.INGREDIENT_X_BTN)
+        self.wait_for(element_invisibility(L.INGREDIENT_X_BTN))
 
     @allure.step('Клик по кнопке «Оформить заказ»')
     def place_order_btn_click(self):
@@ -61,13 +49,15 @@ class MainPage(BasePage):
     def get_orders_list_title(self):
         return self.get_element(L.ORDERS_LIST_TITLE)
 
+    @allure.step('Получение ингредиента')
+    def get_ingredient(self, slicer=slice(None)):
+        return random.choice(
+            self.get_elements_kit(L.INGREDIENTS_LINKS)[slicer]
+        )
+
     @allure.step('Получение заголовка окна деталей ингредиента')
     def get_ingredient_details_title(self):
         return self.get_element(L.INGREDIENT_DETAILS_TITLE)
-
-    @allure.step('Получение ингредиента конкретного типа')
-    def get_ingredient(self, slicer):
-        return random.choice(self.get_elements_kit(L.INGREDIENTS_LINKS)[slicer])
 
     @allure.step('Получение счётчика ингредиента')
     def get_counter(self, ingredient):
@@ -78,12 +68,9 @@ class MainPage(BasePage):
     def get_basket(self):
         return self.get_element(L.BASKET)
 
-    @allure.step('Получение заголовка окна подтверждения заказа')
-    def get_order_number_element(self):
-        self.wait_for(
-            e_c.text_to_be_present_in_element(L.ORDER_ID, text_=ORDER_NUMBER_STUB),
-            until='_not'
-        )
+    @allure.step('Получение номера оформленного заказа')
+    def get_order_number(self):
+        self.wait_for(text_in_element(L.ORDER_ID, text_=STUB), until='_not')
         return self.get_element(L.ORDER_ID)
 
     @allure.step('Получение текста в окне деталей заказа')
@@ -107,11 +94,13 @@ class MainPage(BasePage):
         self.drag_to(ingredient, basket)
 
     @allure.step('Создание заказа и получение его номера')
-    def make_order(self, login_page, test_user):
-        login_page.login(self, **test_user)
+    def make_order(self, header_page, login_page, test_user):
+        header_page.personal_account_link_click()
+        login_page.login(**test_user)
+        basket = self.get_basket()
         for slicer in SLICERS:
-            self.add_ingredient_to_basket(
-                self.get_ingredient(slicer), self.get_basket()
-            )
+            self.add_ingredient_to_basket(self.get_ingredient(slicer), basket)
         self.place_order_btn_click()
-        return self.get_order_number_element()
+        order_number = self.get_order_number()
+        self.order_number_X_click()
+        return order_number

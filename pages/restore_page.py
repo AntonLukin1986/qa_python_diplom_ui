@@ -8,13 +8,13 @@ from pages.base_page import BasePage
 class RestorePage(BasePage):
 
     @allure.step('Открытие страницы «Восстановление пароля»')
-    def open_it(self, main_page, login_page):
+    def open_restore_page(self, login_page, main_page):
         main_page.enter_account_btn_click()
         login_page.restore_pass_link_click()
 
     @allure.step('Переход в раздел сохранения нового пароля')
-    def confirmation(self, main_page, login_page, email):
-        self.open_it(main_page, login_page)
+    def confirmation(self, login_page, main_page, email):
+        self.open_restore_page(login_page, main_page)
         self.input_email(email)
         self.restore_btn_click()
 

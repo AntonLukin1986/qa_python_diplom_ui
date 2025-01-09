@@ -24,8 +24,7 @@ class LoginPage(BasePage):
         self.fill_in(L.PASSWORD_INPUT, password)
 
     @allure.step('Авторизация пользователя')
-    def login(self, main_page, email, password):
-        main_page.enter_account_btn_click()
+    def login(self, email, password):
         self.input_email(email)
         self.input_password(password)
         self.enter_button_click()

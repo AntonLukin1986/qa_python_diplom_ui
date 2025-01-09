@@ -5,10 +5,17 @@ from selenium import webdriver
 
 from config import API_CREATE_USER, API_DELETE_USER, BROWSERS, MAIN_PAGE
 from helpers import get_user_data
+from pages.header_page import HeaderPage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.profile_page import ProfilePage
 from pages.restore_page import RestorePage
+
+
+@pytest.fixture(scope='function')
+def header_page(driver):
+    '''Объект хедера всех страниц.'''
+    return HeaderPage(driver)
 
 
 @pytest.fixture(scope='function')
@@ -57,6 +64,4 @@ def test_user():
     ).json().get('accessToken')
     del user_data['name']
     yield user_data  # email & password
-    requests.delete(
-        url=API_DELETE_USER, headers={'Authorization': token}
-    )
+    requests.delete(url=API_DELETE_USER, headers={'Authorization': token})

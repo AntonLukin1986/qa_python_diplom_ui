@@ -16,26 +16,17 @@ class BasePage:
 
     def get_elements_kit(self, locator):
         '''Получение заданного набора элементов.'''
-        self.wait_for(e_c.presence_of_element_located(locator))
+        self.wait_for(e_c.presence_of_all_elements_located(locator))
         return self.driver.find_elements(*locator)
 
     def click_element(self, locator):
         '''Клик по элементу.'''
-        # from selenium.common.exceptions import ElementClickInterceptedException
-        # try:
-        #     self.get_element(locator).click()
-        # except ElementClickInterceptedException:
-        #     self.driver.execute_script('arguments[0].click()', self.get_element(locator))
-        self.get_element(locator).click()
-
-    def wait_and_click_element(self, locator):
-        '''Клик по элементу с предварительным ожиданием.'''
         self.wait_for(e_c.element_to_be_clickable(locator))
         self.get_element(locator).click()
 
-    def fill_in(self, locator, *value):
+    def fill_in(self, locator, *values):
         '''Заполнение поля ввода.'''
-        self.get_element(locator).send_keys(value)
+        self.get_element(locator).send_keys(values)
 
     def scroll_to(self, element):
         '''Прокрутка экрана до элемента.'''
