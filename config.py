@@ -9,7 +9,8 @@ FIREFOX_JS = '''
 function simulateHTML5DragAndDrop(sourceNode, destinationNode) {
     var dataTransfer = new DataTransfer();
     var dragStartEvent = new DragEvent(
-        'dragstart', {bubbles: true, cancelable: true, dataTransfer: dataTransfer}
+        'dragstart',
+        {bubbles: true, cancelable: true, dataTransfer: dataTransfer}
     );
     sourceNode.dispatchEvent(dragStartEvent);
     var dropEvent = new DragEvent(
@@ -17,7 +18,8 @@ function simulateHTML5DragAndDrop(sourceNode, destinationNode) {
     );
     destinationNode.dispatchEvent(dropEvent);
     var dragEndEvent = new DragEvent(
-        'dragend', {bubbles: true, cancelable: true, dataTransfer: dataTransfer}
+        'dragend',
+        {bubbles: true, cancelable: true, dataTransfer: dataTransfer}
     );
     sourceNode.dispatchEvent(dragEndEvent);
 }

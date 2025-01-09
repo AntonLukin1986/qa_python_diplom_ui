@@ -7,22 +7,6 @@ from data import STUB
 
 class TestMainPage:
 
-    @allure.title('Успешный переход по клику на «Конструктор»')
-    def test_constructor_link_click_open_constructor(
-        self, header_page, main_page
-    ):
-        header_page.personal_account_link_click()
-        header_page.constructor_link_click()
-        assert main_page.get_constructor_title().is_displayed()
-
-    @allure.title('Успешный переход по клику на «Лента заказов»')
-    def test_orders_list_link_click_open_orders_list(
-        self, header_page, main_page
-    ):
-        header_page.personal_account_link_click()
-        header_page.orders_list_link_click()
-        assert main_page.get_orders_list_title().is_displayed()
-
     @allure.title('Клик по ингредиенту открывает окно с деталями')
     def test_ingredient_click_open_details(self, main_page):
         main_page.ingredient_click(main_page.get_ingredient())

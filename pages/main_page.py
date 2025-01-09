@@ -41,14 +41,6 @@ class MainPage(BasePage):
     def order_number_X_click(self):
         self.click_element(L.ORDER_ID_X_BTN)
 
-    @allure.step('Получение заголовка конструктора')
-    def get_constructor_title(self):
-        return self.get_element(L.CONSTRUCTOR_TITLE)
-
-    @allure.step('Получение заголовка ленты заказов')
-    def get_orders_list_title(self):
-        return self.get_element(L.ORDERS_LIST_TITLE)
-
     @allure.step('Получение ингредиента')
     def get_ingredient(self, slicer=slice(None)):
         return random.choice(
@@ -64,7 +56,7 @@ class MainPage(BasePage):
         index = self.get_elements_kit(L.INGREDIENTS_LINKS).index(ingredient)
         return self.get_elements_kit(L.INGREDIENTS_COUNTERS)[index]
 
-    @allure.step('Получение корзины заказа')
+    @allure.step('Получение корзины для заказа')
     def get_basket(self):
         return self.get_element(L.BASKET)
 
@@ -88,6 +80,10 @@ class MainPage(BasePage):
     @allure.step('Получение счётчика заказов «за всё время» или «за сегодня»')
     def get_orders_counter(self, name):
         return self.get_element(format_locator(L.ORDERS_COUNTER, name))
+
+    @allure.step('Получение заголовка раздела главной страницы')
+    def get_section_title(self, name):
+        return self.get_element(format_locator(L.SECTION_TITLE, name))
 
     @allure.step('Добавление ингредиента в корзину')
     def add_ingredient_to_basket(self, ingredient, basket):
