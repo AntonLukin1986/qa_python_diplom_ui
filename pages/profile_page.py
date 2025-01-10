@@ -7,11 +7,13 @@ from pages.base_page import BasePage
 
 class ProfilePage(BasePage):
 
-    @allure.step('Открытие профиля пользователя')
-    def open_profile_page(self, header_page, login_page, test_user):
-        header_page.personal_account_link_click()
-        login_page.login(**test_user)
-        header_page.personal_account_link_click()
+    @allure.step('Клик по ссылке «История заказов»')
+    def orders_history_link_click(self):
+        self.click_element(L.ORDERS_HISTORY_LINK)
+
+    @allure.step('Клик по ссылке «Выход»')
+    def exit_link_click(self):
+        self.click_element(L.EXIT_LINK)
 
     @allure.step('Получение информационного сообщения')
     def get_message(self):
@@ -21,10 +23,8 @@ class ProfilePage(BasePage):
     def get_order_number(self):
         return self.get_element(L.ORDER_NUMBER)
 
-    @allure.step('Клик по ссылке «История заказов»')
-    def orders_history_link_click(self):
-        self.click_element(L.ORDERS_HISTORY_LINK)
-
-    @allure.step('Клик по ссылке «Выход»')
-    def exit_link_click(self):
-        self.click_element(L.EXIT_LINK)
+    @allure.step('Открытие профиля пользователя')
+    def open_profile_page(self, header_page, login_page, test_user):
+        header_page.personal_account_link_click()
+        login_page.login(**test_user)
+        header_page.personal_account_link_click()

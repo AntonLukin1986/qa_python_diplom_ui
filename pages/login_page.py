@@ -15,6 +15,10 @@ class LoginPage(BasePage):
     def enter_button_click(self):
         self.click_element(L.ENTER_BTN)
 
+    @allure.step('Получение заголовка формы «Вход»')
+    def get_entrance_title(self):
+        return self.get_element(L.ENTRANCE_TITLE)
+
     @allure.step('Заполнение поля «email»')
     def input_email(self, email):
         self.fill_in(L.EMAIL_INPUT, email)
@@ -28,7 +32,3 @@ class LoginPage(BasePage):
         self.input_email(email)
         self.input_password(password)
         self.enter_button_click()
-
-    @allure.step('Получение заголовка формы «Вход»')
-    def get_entrance_title(self):
-        return self.get_element(L.ENTRANCE_TITLE)
