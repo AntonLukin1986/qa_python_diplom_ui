@@ -19,7 +19,7 @@ class TestProfilePage:
     ):
         profile_page.open_profile_page(header_page, login_page, test_user)
         profile_page.orders_history_link_click()
-        assert profile_page.driver.current_url == ORDER_HISTORY_PAGE
+        assert profile_page.get_current_url() == ORDER_HISTORY_PAGE
 
     @allure.title('Успешный выход из аккаунта по ссылке «Выход»')
     def test_exit_link_click_user_logout(

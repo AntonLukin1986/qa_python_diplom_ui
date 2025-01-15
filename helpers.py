@@ -30,7 +30,3 @@ def get_user_data():
         'password': generate_password(),
         'email': generate_email()
     }
-
-
-if __name__ == '__main__':
-    print(get_user_data())

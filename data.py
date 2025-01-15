@@ -1,5 +1,6 @@
 '''Статичные данные.'''
 ACTIVE = 'input_status_active'  # класс поля в фокусе
+BLOCKER = 'Modal_modal_overlay__x2ZCr'  # класс окна-блокировщика
 EMAIL = 'test@mail.ru'
 INGREDIENTS_INDEXES = {
     'buns': slice(2),

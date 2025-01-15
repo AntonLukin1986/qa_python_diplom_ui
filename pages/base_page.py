@@ -6,6 +6,7 @@ from selenium.webdriver.support import expected_conditions as e_c
 from selenium.webdriver.support.wait import WebDriverWait
 
 from config import FIREFOX_JS
+from data import BLOCKER
 
 
 class BasePage:
@@ -25,6 +26,10 @@ class BasePage:
         self.wait_for(e_c.presence_of_all_elements_located(locator))
         return self.driver.find_elements(*locator)
 
+    def get_current_url(self):
+        '''Получение текущего URL.'''
+        return self.driver.current_url
+
     def click_element(self, entity: tuple | WebElement):
         '''Клик по элементу.'''
         element = self.get_element(entity)
@@ -40,7 +45,7 @@ class BasePage:
             try:
                 element.click()
             except ElementClickInterceptedException as error:
-                if 'Modal_modal_overlay__x2ZCr' not in str(error):
+                if BLOCKER not in str(error):
                     raise ElementClickInterceptedException(error)
             else:
                 break
