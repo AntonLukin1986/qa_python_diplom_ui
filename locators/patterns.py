@@ -1,0 +1,37 @@
+'''Универсальные шаблоны локаторов.'''
+PREFIX = '//'
+
+A = 'a'
+BUTTON = 'button'
+DIV = 'div'
+H1 = 'h1'
+H2 = 'h2'
+INPUT = 'input'
+LABEL = 'label'
+LI = 'li'
+P = 'p'
+UL = 'ul'
+
+ATTRIBUTE = '[@{}="{}"]'
+CONTAINS_CLASS = '[contains(@class, "{}")]'
+TEXT = '[text()="{}"]'
+UP = '/ancestor::{}'
+
+BUTTON_TXT = PREFIX + BUTTON + TEXT
+HEADER1_TXT = PREFIX + H1 + TEXT
+HEADER2_TXT = PREFIX + H2 + TEXT
+LABEL_TXT = PREFIX + LABEL + TEXT
+LI_TXT = PREFIX + LI + TEXT
+LINK_TXT = PREFIX + A + TEXT
+PARAG_TXT = PREFIX + P + TEXT
+
+A_CONTAINS_CLS = PREFIX + A + CONTAINS_CLASS
+DIV_CONTAINS_CLS = PREFIX + DIV + CONTAINS_CLASS
+LI_CONTAINS_CLS = PREFIX + LI + CONTAINS_CLASS
+P_CONTAINS_CLS = PREFIX + P + CONTAINS_CLASS
+UL_CONTAINS_CLS = PREFIX + UL + CONTAINS_CLASS
+
+INPUT_ATTR = PREFIX + INPUT + ATTRIBUTE
+LINK_ATTR = PREFIX + A + ATTRIBUTE
+
+FIRST_LI_ITEM = LI_CONTAINS_CLS[:-1] + ' and position()=1]'
