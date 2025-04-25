@@ -3,7 +3,7 @@ import pytest
 import requests
 from selenium import webdriver
 
-from config import API_CREATE_USER, API_DELETE_USER, BROWSERS, MAIN_PAGE
+from config import BROWSERS, Url
 from helpers import get_user_data
 from pages.header_page import HeaderPage
 from pages.login_page import LoginPage
@@ -50,7 +50,7 @@ def driver(request):
     for argument in BROWSERS[name]:
         options.add_argument(argument)
     driver = getattr(webdriver, name)(options)
-    driver.get(MAIN_PAGE)
+    driver.get(Url.MAIN)
     yield driver
     driver.quit()
 
@@ -60,8 +60,8 @@ def test_user():
     '''Создание пользователя с последующим удалением.'''
     user_data = get_user_data()
     token = requests.post(
-        url=API_CREATE_USER, data=user_data
+        url=Url.CREATE_USER, data=user_data
     ).json().get('accessToken')
     del user_data['name']
     yield user_data  # email & password
-    requests.delete(url=API_DELETE_USER, headers={'Authorization': token})
+    requests.delete(url=Url.DELETE_USER, headers={'Authorization': token})

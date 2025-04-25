@@ -1,14 +1,23 @@
 '''Конфигурация тестов.'''
 
 
+class Url:
+    MAIN = 'https://stellarburgers.nomoreparties.site/'
+    ORDER_HISTORY = MAIN + 'account/order-history'
+    CREATE_USER = MAIN + 'api/auth/register'
+    DELETE_USER = MAIN + 'api/auth/user'
+
+
 class Resolution:
     FHD = 1920, 1080
+    QHD = 2560, 1440
 
 
 BROWSERS = {
     'Chrome': ['--window-size={},{}'.format(*Resolution.FHD)],
     'Firefox': '--width={} --height={}'.format(*Resolution.FHD).split()
 }
+
 FIREFOX_JS = '''
 function simulateHTML5DragAndDrop(sourceNode, destinationNode) {
     var dataTransfer = new DataTransfer();
@@ -29,8 +38,3 @@ function simulateHTML5DragAndDrop(sourceNode, destinationNode) {
 }
 simulateHTML5DragAndDrop(arguments[0], arguments[1]);
 '''
-
-MAIN_PAGE = 'https://stellarburgers.nomoreparties.site/'
-ORDER_HISTORY_PAGE = MAIN_PAGE + 'account/order-history'
-API_CREATE_USER = MAIN_PAGE + 'api/auth/register'
-API_DELETE_USER = MAIN_PAGE + 'api/auth/user'
